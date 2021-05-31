@@ -3,7 +3,7 @@ import Svg from "react-native-svg";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  flex:1;
+  width:100%;
  
 `
 export const CarFeatureWrapper = styled.View`
@@ -12,17 +12,14 @@ export const CarFeatureWrapper = styled.View`
   background-color: ${({theme}) => theme.colors.background_primary};
   align-items:center;
   justify-content: center;
+  padding: 16px;
+  margin-bottom: 8px;
+
 
 `;
-
-export const FeatureIcon = styled(Svg)`
-  width:${RFValue(28)}px;
-  height:${RFValue(28)}px;
-`;
-
 export const FeatureData = styled.Text`
   font-size: ${RFValue(16)}px;
-  font-family: ${({theme}) => theme.fonts.primary_500};
+  font-family: ${({theme}) => theme.fonts.secondary_500};
   color: ${({theme}) => theme.colors.text};
   margin-top: 14px;
 `;

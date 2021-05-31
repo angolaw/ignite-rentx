@@ -13,7 +13,7 @@ export default function App() {
     Archivo_400Regular, Archivo_500Medium,Archivo_600SemiBold,Inter_400Regular, Inter_500Medium
   })
   if(!fontsLoaded)
-    <AppLoading/>
+    return <AppLoading/>
   return (
    <ThemeProvider  theme={theme} >
      <StatusBar barStyle={"light-content"} backgroundColor="transparent" translucent  />

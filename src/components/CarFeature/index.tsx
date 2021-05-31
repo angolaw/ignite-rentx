@@ -1,20 +1,18 @@
 import React from 'react'
 import { CarFeatureWrapper, Container, FeatureData, FeatureIcon } from './styles'
-import Speed from '../../assets/speed.svg'
+import { SvgProps } from 'react-native-svg'
 
-interface CarFeatureProps {
-  data: CarFeatureData
-}
-export interface CarFeatureData{
-  category: string;
+
+export interface CarFeatureProps{
+  icon: React.FC<SvgProps>;
   info: string;
 }
-export function CarFeature({data}: CarFeatureProps){
+export function CarFeature({icon: Icon, info}: CarFeatureProps){
   return (
      <Container>
        <CarFeatureWrapper>
-         <FeatureIcon> {<Speed/>} </FeatureIcon>
-         <FeatureData>{data.info}</FeatureData>
+         <Icon/>
+         <FeatureData>{info}</FeatureData>
        </CarFeatureWrapper>
     </Container>
   )
