@@ -5,7 +5,7 @@ export default {
     background_secondary: '#ffffff',
     text: '#7a7a80',
     text_detail: '#aeaeb3',
-    title: '#4747d',
+    title: '#47474d',
     line: '#ebebf0',
     main: '#dc1637',
     main_light: '#fdedef',
