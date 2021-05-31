@@ -2,10 +2,10 @@ import React from 'react'
 import { CarList, Container, Header, HeaderContent, TotalCars } from './styles'
 import Logo from '../../assets/logo.svg'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { Car } from '../../components/Car'
+import { Car, } from '../../components/Car'
 export function Home(){
   const carData = {
-     brand: "Audi",
+    brand: "Audi",
     model: "R8 V12",
     rent: {
       recurrency: 'ao dia',
