@@ -6,6 +6,7 @@ import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/styles/theme';
 import {StatusBar} from 'react-native'
+import { CarDetails } from './src/screens/CarDetails';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,7 +17,7 @@ export default function App() {
   return (
    <ThemeProvider  theme={theme} >
      <StatusBar barStyle={"light-content"} backgroundColor="transparent" translucent  />
-     <Home/>
+     <CarDetails/>
    </ThemeProvider>
   );
 }
