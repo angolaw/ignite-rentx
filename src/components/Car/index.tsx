@@ -3,29 +3,36 @@ import { About, Brand, CarImage, Container, Details, Name, Period, Price, Rent, 
 import Hybrid from '../../assets/hybrid.svg'
 import CarPhoto from '../../assets/placeholder_car.png'
 interface CarProps {
-  brand: string;
-  model: string;
-  recurrency: 'daily';
-  price: number;
-  fuel: 'eletric' | 'gas' | 'hybrid'
+  data: CarData;
 }
 
-export function Car(){
+interface CarData{
+    brand: string;
+    model: string;
+    rent: {
+      recurrency: 'daily';
+      price: number;
+    };
+    thumbnail: string;
+  
+}
+export function Car({data}: CarProps){
   return (
      <Container>
        <Details>
-            <Brand>AUDI</Brand>
-            <Name>RS 5 Coupè</Name>
+            <Brand>{data.brand}</Brand>
+            <Name>{data.model}</Name>
           <About>
             <Rent>
-               <Period>AO DIA</Period>
-              <Price>R$ 120</Price>
+               <Period>{data.rent.recurrency}</Period>
+              <Price>{`R$ ${data.rent.price}`}</Price>
             </Rent>
             <Type><Hybrid/></Type>
           </About>
 
        </Details>
-        <CarImage source={CarPhoto} />
+        <CarImage source={{uri: data.thumbnail}} resizeMode="contain" />
+
      </Container>
   )
 }
