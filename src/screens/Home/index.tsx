@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, HeaderContent, TotalCars } from './styles'
+import { CarList, Container, Header, HeaderContent, TotalCars } from './styles'
 import Logo from '../../assets/logo.svg'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Car } from '../../components/Car'
@@ -32,8 +32,12 @@ export function Home(){
           <TotalCars>Total de 12 carros</TotalCars>
         </HeaderContent>
       </Header>
-      <Car data={carData} />
-      <Car data={carDataPorsche} />
+      <CarList 
+        data={[1,2,3,4,5,6,7]}
+        keyExtractor={item => String(item)}
+        renderItem={({item}) => <Car data={carData}/>}
+      />
+    
 
     </Container>
   )
