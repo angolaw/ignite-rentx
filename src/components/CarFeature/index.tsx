@@ -1,5 +1,5 @@
 import React from 'react'
-import { CarFeatureWrapper, Container, FeatureData, FeatureIcon } from './styles'
+import { CarFeatureWrapper, Container, FeatureData } from './styles'
 import { SvgProps } from 'react-native-svg'
 
 

@@ -2,15 +2,13 @@ import React from 'react'
 import { BackButton } from '../../components/BackButton'
 import { CarFeature } from '../../components/CarFeature'
 import { Container,Header,
-CarImage,
-RentData,
+Details,
 RentCarData,
 Brand,
 Model,
 RentCarCost,
 Period,
 Price, 
-CarFeatureList,
 CarImages,
 Content,
 About,
@@ -19,6 +17,10 @@ import {useTheme} from 'styled-components'
 import { ImageSlider } from '../../components/ImageSlider'
 
 import Acceleration from '../../assets/acceleration.svg'
+import Speed from '../../assets/speed.svg'
+import Force from '../../assets/force.svg'
+import Gasoline from '../../assets/gasoline.svg'
+import Exchange from '../../assets/exchange.svg'
 
 export function CarDetails(){
    
@@ -31,11 +33,11 @@ const theme = useTheme()
           
        </Header>
        <CarImages>
-                 <ImageSlider imagesUrl={['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg2.gratispng.com%2F20180704%2Fjxj%2Fkisspng-volkswagen-up-car-volkswagen-touareg-2018-volkswag-volkswagen-5b3ce033003919.9152554115307162110009.jpg&f=1&nofb=1','https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.glimport.ch%2Fdoc%2Fimages%2Fvw-up.png&f=1&nofb=1']}/>
+         <ImageSlider imagesUrl={['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg2.gratispng.com%2F20180704%2Fjxj%2Fkisspng-volkswagen-up-car-volkswagen-touareg-2018-volkswag-volkswagen-5b3ce033003919.9152554115307162110009.jpg&f=1&nofb=1','https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.glimport.ch%2Fdoc%2Fimages%2Fvw-up.png&f=1&nofb=1']}/>
 
        </CarImages>
        <Content>
-         <RentData>
+         <Details>
             <RentCarData>
                <Brand>Volkswagen</Brand>
                <Model>Up! TSI</Model>
@@ -44,11 +46,29 @@ const theme = useTheme()
                <Period>AO DIA</Period>
                <Price>{`R$ 250`}</Price>
             </RentCarCost>
-         </RentData>
+         </Details>
          <Features>
             <CarFeature
             icon={Acceleration}
+            info="3.2s" />
+            <CarFeature
+            icon={Speed}
             info="300km/h" />
+            <CarFeature
+            icon={Exchange}
+            info="Manual" />
+            <CarFeature
+            icon={Gasoline}
+            info="2.8km/l" />
+            <CarFeature
+            icon={Force}
+            info="800hp" />
+            <CarFeature
+            icon={Force}
+            info="800hp" />
+            <CarFeature
+            icon={Force}
+            info="800hp" />
          </Features>
         
          <About>

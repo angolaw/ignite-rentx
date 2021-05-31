@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex:1;
-  background-color: ${({theme}) => theme.colors.background_primary}
+  background-color: ${({theme}) => theme.colors.background_secondary}
 `
 export const Header = styled.View`
   height:56px;
@@ -23,7 +23,7 @@ export const CarImage = styled.Image`
   
 `;
 
-export const RentData = styled.View`
+export const Details = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
@@ -32,7 +32,6 @@ export const RentData = styled.View`
 `;
 
 export const RentCarData = styled.View`
-  padding: 4px;
 `;
 
 export const Brand = styled.Text`
@@ -66,12 +65,7 @@ export const Price = styled.Text`
   color: ${({theme}) => theme.colors.main};
   margin-top: 4px;
 `;
-export const CarFeatureList = styled(FlatList).attrs({
-  contentContainerStyle:{
-    padding: 8,
-  },
-  showsVerticalScrollIndicator:false
-})``
+
 export const Content = styled.ScrollView.attrs({
   contentContainerStyle:{
     padding:24,
@@ -86,6 +80,7 @@ export const About = styled.Text`
   font-size: ${RFValue(15)}px;
   text-align: justify;
   margin-top: 24px;
+  line-height:25px;
 
 `;
 export const CarImages = styled.View`
@@ -93,4 +88,9 @@ export const CarImages = styled.View`
 `;
 export const Features = styled.View`
   width: 100%;
+  flex-direction:row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 16px;
+
 `;
