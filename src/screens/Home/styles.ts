@@ -9,12 +9,15 @@ export const Container = styled.View`
 export const Header = styled.View`
   height:113px;
   width:100%;
+
+  background-color: ${({theme}) => theme.colors.header};
+  justify-content:flex-end;
+  padding: 32px 24px;
+`;
+export const HeaderContent = styled.View`
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-
-  background-color: ${({theme}) => theme.colors.header}
-
 `;
 export const TotalCars = styled.Text`
   font-family: ${({theme}) => theme.fonts.primary_400};
