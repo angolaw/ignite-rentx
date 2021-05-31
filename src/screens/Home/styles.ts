@@ -8,6 +8,6 @@ export const Container = styled.View`
 export const Header = styled.View`
   height:113px;
   width:100%;
-  background-color: ${({theme}) => theme.colors.shape_dark}
+  background-color: ${({theme}) => theme.colors.header}
 
 `;

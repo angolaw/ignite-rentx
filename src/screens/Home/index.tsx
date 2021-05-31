@@ -4,7 +4,9 @@ import { Container, Header } from './styles'
 export function Home(){
   return (
      <Container>
-      <Header/>
+      <Header>
+        <Logo></Logo>
+      </Header>
     </Container>
   )
 }
