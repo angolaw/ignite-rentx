@@ -1,11 +1,16 @@
+import { FlatList } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex:1;
+  background-color: ${({theme}) => theme.colors.background_primary}
 `
 export const Header = styled.View`
   height:56px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const CarImage = styled.Image`
@@ -54,3 +59,9 @@ export const Price = styled.Text`
   color: ${({theme}) => theme.colors.main};
   margin-top: 4px;
 `;
+export const CarFeatureList = styled(FlatList).attrs({
+  contentContainerStyle:{
+    padding: 8,
+  },
+  showsVerticalScrollIndicator:false
+})``
