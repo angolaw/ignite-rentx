@@ -21,6 +21,7 @@ Name,
 Rent,
 Period,
 Price,
+About,
 
 } from './styles'
 export function CarDetails(){
@@ -52,6 +53,9 @@ export function CarDetails(){
                  <Price>R$ 590</Price>
               </Rent>
            </Details>
+           <About>
+              Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
+           </About>
         </Content>
      </Container>
   )
