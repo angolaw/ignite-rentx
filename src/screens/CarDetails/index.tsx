@@ -23,11 +23,17 @@ import Force from '../../assets/force.svg'
 import Gasoline from '../../assets/gasoline.svg'
 import Exchange from '../../assets/exchange.svg'
 import { Button } from '../../components/Button'
+import { useNavigation } from '@react-navigation/native'
 
 export function CarDetails(){
    
-const theme = useTheme()
-   
+  const theme = useTheme()
+  const navigation = useNavigation();
+
+ function handleCarSchedule(){
+    navigation.navigate('Scheduling')
+  }
+     
   return (
      <Container>
        <Header>
@@ -80,7 +86,7 @@ const theme = useTheme()
          </About>
        </Content>
        <Footer>
-          <Button title={"Escolher"} color={theme.colors.main} onPress={()=>{}} />
+          <Button title={"Escolher período do aluguel"} color={theme.colors.main} onPress={handleCarSchedule} />
        </Footer>
        
        

@@ -5,8 +5,15 @@ import DoneSvg from '../../assets/done.svg'
 import { useWindowDimensions } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { ConfirmButton } from '../../components/ConfirmButton'
+import { useNavigation } from '@react-navigation/native'
 export function SchedulingComplete(){
   const dimensions = useWindowDimensions()
+    const navigation = useNavigation();
+
+ function handleCarSchedulingHome(){
+    navigation.navigate('Home')
+  }
+    
   return (
      <Container>
        <LogoSvg width={dimensions.width} />
@@ -16,7 +23,7 @@ export function SchedulingComplete(){
           <Message>Agora você só precisa ir{'\n'}até a concessionária da RENTX{'\n'}pegar o seu automóvel.</Message>
        </Content>
        <Footer>
-         <ConfirmButton title="Ok" onPress={() => {}}/>
+         <ConfirmButton title="Ok" onPress={handleCarSchedulingHome}/>
        </Footer>
     </Container>
   )

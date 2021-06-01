@@ -36,9 +36,15 @@ import Gasoline from '../../assets/gasoline.svg'
 import Exchange from '../../assets/exchange.svg'
 import { Button } from '../../components/Button'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { useNavigation } from '@react-navigation/native'
 
 export function SchedulingDetails(){
-   
+     const navigation = useNavigation();
+
+ function handleCarSchedulingComplete(){
+    navigation.navigate('SchedulingComplete')
+  }
+    
 const theme = useTheme()
    
   return (
@@ -112,7 +118,7 @@ const theme = useTheme()
         
        </Content>
        <Footer>
-          <Button title={"Escolher"} color={theme.colors.main} onPress={()=>{}} />
+          <Button title={"Alugar agora"} color={theme.colors.success} onPress={handleCarSchedulingComplete} />
        </Footer>
        
        
