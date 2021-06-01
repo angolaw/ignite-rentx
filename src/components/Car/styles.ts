@@ -1,9 +1,10 @@
 import { FlatList } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import Svg from "react-native-svg";
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const Container = styled(RectButton)`
   background-color: ${({theme}) => theme.colors.background_secondary};
   width: 100%;
   height:126px;
@@ -14,7 +15,6 @@ export const Container = styled.View`
   margin-bottom: 16px;
 `
 export const Details = styled.View`
-  padding: 24px;
 `;
 export const Rent = styled.View`
   margin-right: 24px;
