@@ -8,6 +8,7 @@ import Acceleration from '../../assets/acceleration.svg'
 import Speed from '../../assets/speed.svg'
 import Force from '../../assets/force.svg'
 import Gasoline from '../../assets/gasoline.svg'
+import People from '../../assets/people.svg'
 import Exchange from '../../assets/exchange.svg'
 import { Button } from '../../components/Button'
 import { useNavigation } from '@react-navigation/native'
@@ -21,6 +22,7 @@ Rent,
 Period,
 Price,
 About,
+Accessories
 
 } from './styles'
 import { Accessory } from '../../components/Accessory'
@@ -53,10 +55,19 @@ export function CarDetails(){
                  <Price>R$ 590</Price>
               </Rent>
            </Details>
-           <Accessory name="320km/h" icon={Speed} />
+           <Accessories>
+                  <Accessory name="320km/h" icon={Speed} />
+                  <Accessory name="12km/l" icon={Gasoline} />
+                  <Accessory name="3.2s" icon={Acceleration} />
+                  <Accessory name="150HP" icon={Force} />
+                  <Accessory name="Manual" icon={Exchange} />
+                  <Accessory name="4 pessoas" icon={People} />
+
+           </Accessories>
            <About>
               Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
            </About>
+           <Button title="Escolher o periodo do aluguel" onPress={() =>{}} />
         </Content>
      </Container>
   )
