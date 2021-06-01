@@ -67,7 +67,7 @@ export function CarDetails(){
            <About>
               Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
            </About>
-           <Button title="Escolher o periodo do aluguel" onPress={() =>{}} />
+           <Button title="Escolher o periodo do aluguel" onPress={handleCarSchedule} />
         </Content>
      </Container>
   )

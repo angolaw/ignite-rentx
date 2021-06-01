@@ -13,7 +13,7 @@ CarImages,
 Content,
 About,
 Footer,
-Features,
+Accessories,
 CalendarIcon,
 RentalPeriod,
 DateInfo,
@@ -33,10 +33,12 @@ import Acceleration from '../../assets/acceleration.svg'
 import Speed from '../../assets/speed.svg'
 import Force from '../../assets/force.svg'
 import Gasoline from '../../assets/gasoline.svg'
+import People from '../../assets/people.svg'
 import Exchange from '../../assets/exchange.svg'
 import { Button } from '../../components/Button'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useNavigation } from '@react-navigation/native'
+import { Accessory } from '../../components/Accessory'
 
 export function SchedulingDetails(){
      const navigation = useNavigation();
@@ -68,29 +70,15 @@ const theme = useTheme()
                <Price>{`R$ 250`}</Price>
             </RentCarCost>
          </Details>
-         <Features>
-            <CarFeature
-            icon={Acceleration}
-            info="3.2s" />
-            <CarFeature
-            icon={Speed}
-            info="300km/h" />
-            <CarFeature
-            icon={Exchange}
-            info="Manual" />
-            <CarFeature
-            icon={Gasoline}
-            info="2.8km/l" />
-            <CarFeature
-            icon={Force}
-            info="800hp" />
-            <CarFeature
-            icon={Force}
-            info="800hp" />
-            <CarFeature
-            icon={Force}
-            info="800hp" />
-         </Features>
+          <Accessories>
+                  <Accessory name="320km/h" icon={Speed} />
+                  <Accessory name="12km/l" icon={Gasoline} />
+                  <Accessory name="3.2s" icon={Acceleration} />
+                  <Accessory name="150HP" icon={Force} />
+                  <Accessory name="Manual" icon={Exchange} />
+                  <Accessory name="4 pessoas" icon={People} />
+
+           </Accessories>
          <RentalPeriod>
             <CalendarIcon>
                <Feather name="calendar" size={RFValue(24)} color={theme.colors.shape}/>  

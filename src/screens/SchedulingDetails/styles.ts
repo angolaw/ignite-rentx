@@ -155,3 +155,12 @@ export const RentalPriceTotal = styled.Text`
   font-family: ${({theme}) => theme.fonts.secondary_500};
   color: ${({theme}) => theme.colors.success};
 `;
+export const Accessories = styled.View`
+  width:100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  
+`;
