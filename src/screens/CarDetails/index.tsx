@@ -1,6 +1,5 @@
 import React from 'react'
 import { BackButton } from '../../components/BackButton'
-import { CarFeature } from '../../components/CarFeature'
 
 import {useTheme} from 'styled-components'
 import { ImageSlider } from '../../components/ImageSlider'
