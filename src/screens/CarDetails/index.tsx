@@ -12,6 +12,7 @@ Price,
 CarImages,
 Content,
 About,
+Footer,
 Features} from './styles'
 import {useTheme} from 'styled-components'
 import { ImageSlider } from '../../components/ImageSlider'
@@ -21,6 +22,7 @@ import Speed from '../../assets/speed.svg'
 import Force from '../../assets/force.svg'
 import Gasoline from '../../assets/gasoline.svg'
 import Exchange from '../../assets/exchange.svg'
+import { Button } from '../../components/Button'
 
 export function CarDetails(){
    
@@ -77,7 +79,9 @@ const theme = useTheme()
             É um belíssimo carro para quem gosta de acelerar.
          </About>
        </Content>
-       
+       <Footer>
+          <Button title={"Escolher"} color={theme.colors.main} onPress={()=>{}} />
+       </Footer>
        
        
     </Container>
