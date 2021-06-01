@@ -9,7 +9,7 @@ interface ButtonProps{
 
 export function Button({title, color,...rest }:ButtonProps){
   return (
-     <Container  {...rest}>
+     <Container   {...rest}>
        <Title>{title}</Title>
     </Container>
   )
