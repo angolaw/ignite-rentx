@@ -2,18 +2,16 @@ import { RFValue } from "react-native-responsive-fontsize";
 import Svg from "react-native-svg";
 import styled from "styled-components/native";
 
-export const Container = styled.View`
 
- 
-`
 export const CarFeatureWrapper = styled.View`
   width:${RFValue(109)}px;
   height:${RFValue(92)}px;
   background-color: ${({theme}) => theme.colors.background_primary};
-  align-items:center;
   justify-content: center;
-  padding: 16px;
-  margin-bottom: 8px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 20px;
+
 
 
 `;
