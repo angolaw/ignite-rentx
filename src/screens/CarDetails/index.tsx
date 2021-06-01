@@ -23,6 +23,7 @@ Price,
 About,
 
 } from './styles'
+import { Accessory } from '../../components/Accessory'
 export function CarDetails(){
    
   const theme = useTheme()
@@ -52,6 +53,7 @@ export function CarDetails(){
                  <Price>R$ 590</Price>
               </Rent>
            </Details>
+           <Accessory name="320km/h" icon={Speed} />
            <About>
               Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
            </About>
