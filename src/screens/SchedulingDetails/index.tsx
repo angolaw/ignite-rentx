@@ -1,6 +1,5 @@
 import React from 'react'
 import { BackButton } from '../../components/BackButton'
-import { CarFeature } from '../../components/CarFeature'
 import { Container,Header,
 Details,
 RentCarData,
