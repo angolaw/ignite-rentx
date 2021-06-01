@@ -7,6 +7,7 @@ DateValue, Content, Footer} from './styles'
 import {useTheme} from 'styled-components';
 import ArrowLeft from '../../assets/arrow.svg'
 import { Button } from '../../components/Button';
+import { Calendar } from '../../components/Calendar';
 export function Scheduling(){
   const theme = useTheme()
   return (
@@ -31,7 +32,7 @@ export function Scheduling(){
           </RentalPeriod>
        </Header>
        <Content>
-
+        <Calendar/>
        </Content>
        <Footer>
          <Button onPress={() => {}} title="Confirmar"/>
