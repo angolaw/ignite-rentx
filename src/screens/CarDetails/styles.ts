@@ -86,5 +86,6 @@ export const Accessories = styled.View`
 export const Footer = styled.View`
   width: 100%;
   background-color: ${({theme}) => theme.colors.background_secondary};
+  margin-top: 40px;
   padding: 24px 24px ${getBottomSpace()+24}px;
 `;
