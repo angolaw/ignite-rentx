@@ -11,9 +11,6 @@ export const CarFeatureWrapper = styled.View`
   align-items: center;
   margin-top: 15px;
   padding: 20px;
-
-
-
 `;
 export const FeatureData = styled.Text`
   font-size: ${RFValue(13)}px;
