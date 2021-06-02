@@ -8,7 +8,7 @@ import PeopleSvg from '../assets/people.svg'
 import ExchangeSvg from '../assets/exchange.svg'
 import CarSvg from '../assets/car.svg'
 
-export function getAccessoryDetails(type:string) {
+export function getAccessoryIcon(type:string) {
   switch (type) {
     case 'speed':
       return SpeedSvg
