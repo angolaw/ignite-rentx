@@ -11,15 +11,15 @@ import {Loading} from '../../components/Loading'
 export function Home(){
   const navigation = useNavigation();
   const [cars, setCars] = useState<CarDTO[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   useEffect(()=>{
     async function fetchCars(){
       try {
         const response = await api.get('/cars');
-      setCars(response.data)
+        const data = response ? response.data : []
+        setCars(data)
       } catch (error) {
         console.log(error);
-        
       }finally{
         setIsLoading(false)
       }
@@ -45,14 +45,20 @@ export function Home(){
           <TotalCars>{`Total de ${cars.length} ${cars.length > 1 ? 'carros' : 'carro'}`}</TotalCars>
         </HeaderContent>
       </Header>
-      {isLoading ?  <Loading/> : 
       
-    <CarList 
-        data={cars}
-        keyExtractor={item => String(item.id)}
-        renderItem={({item}) => <Car onPress={() => handleCarDetails(item)} data={item}/>}
-      />
-    }
+      {
+      isLoading ? <Loading/> : 
+      
+        <CarList 
+              data={cars}
+              keyExtractor={item => String(item.id)}
+              renderItem={({item}) => <Car onPress={() => handleCarDetails(item)} data={item}/>}
+          />
+        
+      }
+     
+      
+    
       
   
     </Container>
