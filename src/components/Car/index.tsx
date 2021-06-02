@@ -3,20 +3,12 @@ import { About, Brand, CarImage, Container, Details, Name, Period, Price, Rent, 
 import Hybrid from '../../assets/hybrid.svg'
 import CarPhoto from '../../assets/placeholder_car.png'
 import { RectButtonProps } from 'react-native-gesture-handler'
+import { CarDTO } from '../../dtos/CarDTO'
 interface CarProps extends RectButtonProps {
-  data: CarData;
+  data: CarDTO;
 }
 
-interface CarData{
-    brand: string;
-    name: string;
-    rent: {
-      period: string;
-      price: number;
-    };
-    thumbnail: string;
-  
-}
+
 export function Car({data, ...rest}: CarProps){
   return (
      <Container  {...rest}>

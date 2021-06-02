@@ -31,8 +31,8 @@ export function Home(){
 
  
  
-  function handleCarDetails(){
-    navigation.navigate('CarDetails')
+  function handleCarDetails(selectedCar:CarDTO){
+    navigation.navigate('CarDetails', {selectedCar})
   }
     
   return (
@@ -42,7 +42,7 @@ export function Home(){
             <Logo width={RFValue(108)}
             height={RFValue(12)}
           />
-          <TotalCars>Total de 12 carros</TotalCars>
+          <TotalCars>{`Total de ${cars.length} ${cars.length > 1 ? 'carros' : 'carro'}`}</TotalCars>
         </HeaderContent>
       </Header>
       {isLoading ?  <Loading/> : 
@@ -50,7 +50,7 @@ export function Home(){
     <CarList 
         data={cars}
         keyExtractor={item => String(item.id)}
-        renderItem={({item}) => <Car onPress={handleCarDetails} data={item}/>}
+        renderItem={({item}) => <Car onPress={() => handleCarDetails(item)} data={item}/>}
       />
     }
       

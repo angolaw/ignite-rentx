@@ -35,11 +35,14 @@ export function CarDetails(){
  function handleCarSchedule(){
     navigation.navigate('Scheduling')
   }
+  function handleGoBack() {
+     navigation.goBack()
+  }
      
   return (
      <Container>
         <Header>
-           <BackButton color={theme.colors.shape_dark} onPress={() =>{}} />
+           <BackButton color={theme.colors.shape_dark} onPress={handleGoBack} />
         </Header>
         <CarImages>
                     <ImageSlider imagesUrl={['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg2.gratispng.com%2F20180704%2Fjxj%2Fkisspng-volkswagen-up-car-volkswagen-touareg-2018-volkswag-volkswagen-5b3ce033003919.9152554115307162110009.jpg&f=1&nofb=1','https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.glimport.ch%2Fdoc%2Fimages%2Fvw-up.png&f=1&nofb=1']}/>
