@@ -32,7 +32,7 @@ export function Home(){
  
  
   function handleCarDetails(selectedCar:CarDTO){
-    navigation.navigate('CarDetails', {selectedCar})
+    navigation.navigate('CarDetails', {car:selectedCar})
   }
     
   return (
