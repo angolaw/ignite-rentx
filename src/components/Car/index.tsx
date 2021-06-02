@@ -9,9 +9,9 @@ interface CarProps extends RectButtonProps {
 
 interface CarData{
     brand: string;
-    model: string;
+    name: string;
     rent: {
-      recurrency: 'daily';
+      period: string;
       price: number;
     };
     thumbnail: string;
@@ -22,10 +22,10 @@ export function Car({data, ...rest}: CarProps){
      <Container  {...rest}>
        <Details>
             <Brand>{data.brand}</Brand>
-            <Name>{data.model}</Name>
+            <Name>{data.name}</Name>
           <About>
             <Rent>
-               <Period>{data.rent.recurrency}</Period>
+               <Period>{data.rent.period}</Period>
               <Price>{`R$ ${data.rent.price}`}</Price>
             </Rent>
             <Type><Hybrid/></Type>
