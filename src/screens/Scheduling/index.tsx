@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BackButton } from '../../components/BackButton'
 import { Container, Header, Title, RentalPeriod,
 DateInfo,
@@ -7,10 +7,12 @@ DateValue, Content, Footer} from './styles'
 import {useTheme} from 'styled-components';
 import ArrowLeft from '../../assets/arrow.svg'
 import { Button } from '../../components/Button';
-import { Calendar } from '../../components/Calendar';
+import { Calendar, DayProps, generateInterval, MarkedDateProps } from '../../components/Calendar';
 import { useNavigation } from '@react-navigation/native';
 export function Scheduling(){
-    const navigation = useNavigation();
+ const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps)
+ const [markedDates, setMarkedDates] = useState<MarkedDateProps>({} as MarkedDateProps)
+  const navigation = useNavigation();
 
  function handleCarSchedulingDetails(){
     navigation.navigate('SchedulingDetails')
@@ -18,8 +20,17 @@ export function Scheduling(){
    function handleGoBack() {
      navigation.goBack()
   }
-  function handleChangeDay(){
+  function handleChangeDate(date: DayProps){
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
 
+    if(start.timestamp > end.timestamp){
+      start = end;
+      end = start;
+    }
+    setLastSelectedDate(end)
+    const interval = generateInterval(start, end)
+    setMarkedDates(interval)
   }
    
     
@@ -47,7 +58,8 @@ export function Scheduling(){
        </Header>
        <Content>
         <Calendar
-          onDayPress={handleChangeDay}
+          markedDates={markedDates}
+          onDayPress={handleChangeDate}
 
         />
        </Content>

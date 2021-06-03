@@ -3,7 +3,7 @@ import{ Calendar as CustomCalendar, LocaleConfig, DateCallbackHandler} from 'rea
 import {Feather} from '@expo/vector-icons'
 import {useTheme} from 'styled-components'
 import { ptBR } from './localeConfig'
-
+import {generateInterval} from './generateInterval'
 LocaleConfig.locales['pt-br'] = ptBR
 LocaleConfig.defaultLocale="pt-br"
 
@@ -62,4 +62,4 @@ function Calendar({markedDates, onDayPress}:CalendarProps){
  
   )
 }
-export {Calendar, DayProps, MarkedDateProps}
+export {Calendar, DayProps, MarkedDateProps, generateInterval}
