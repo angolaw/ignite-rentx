@@ -31,15 +31,12 @@ export function Scheduling(){
  const routes = useRoute();
  const {car} = routes.params as Params
  function handleCarSchedulingDetails(){
-   if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted){
-     Alert.alert("Selecione o intervalo para alugar")
-   }else{
-    
+
     navigation.navigate('SchedulingDetails', {
       car, 
       dates: Object.keys(markedDates)
     })
-   }
+   
   }
    function handleGoBack() {
      navigation.goBack()
@@ -97,7 +94,7 @@ export function Scheduling(){
         />
        </Content>
        <Footer>
-         <Button onPress={handleCarSchedulingDetails} title="Confirmar"/>
+         <Button enabled={!!rentalPeriod.startFormatted} onPress={handleCarSchedulingDetails} title="Confirmar"/>
        </Footer>
     </Container>
   )
