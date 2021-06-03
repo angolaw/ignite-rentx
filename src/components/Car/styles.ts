@@ -50,7 +50,7 @@ export const Price = styled.Text`
   color: ${({theme}) => theme.colors.main};
 `;
 
-export const Type = styled.View`
+export const Type = styled.Text`
 
 `;
 export const CarImage = styled.Image`

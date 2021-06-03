@@ -17,6 +17,8 @@ export function Home(){
       try {
         const response = await api.get('/cars');
         const data = response ? response.data : []
+        console.log(data);
+        
         setCars(data)
       } catch (error) {
         console.log(error);
