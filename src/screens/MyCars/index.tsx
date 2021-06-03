@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { BackButton } from '../../components/BackButton'
+import { Loading } from '../../components/Loading'
 import { Container, Header, Title, Subtitle, RentQuantity, RentQuantityLabel, RentQuantityWrapper, Content,
 CarWrapper,
 CarFooter,
@@ -19,6 +20,8 @@ interface CarProps {
   car: CarDTO,
   id: string;
   user_id: string;
+  startDate:string;
+  endDate:string;
 }
 export function MyCars(){
   const theme = useTheme()
@@ -62,7 +65,9 @@ export function MyCars(){
          <RentQuantity>{cars.length}</RentQuantity>
        </RentQuantityWrapper>
 
-       <FlatList 
+   {    
+    loading ? <Loading/> : 
+   <FlatList 
         data={cars}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
@@ -72,15 +77,15 @@ export function MyCars(){
             <CarFooter>
               <CarFooterTitle>Periodo</CarFooterTitle>
               <CarFooterPeriod>
-                <CarFooterDate>{}</CarFooterDate>
+                <CarFooterDate>{item.startDate}</CarFooterDate>
                 <AntDesign name="arrowright" size={20} color={theme.colors.title} style={{marginHorizontal: 10}} />
-                <CarFooterDate>18/05/2021</CarFooterDate>
+                <CarFooterDate>{item.endDate}</CarFooterDate>
 
               </CarFooterPeriod>
             </CarFooter>
           </CarWrapper>
         }
-       />
+       />}
        </Content>
     </Container>
   )
