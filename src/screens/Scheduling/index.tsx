@@ -15,12 +15,16 @@ export function Scheduling(){
  function handleCarSchedulingDetails(){
     navigation.navigate('SchedulingDetails')
   }
+   function handleGoBack() {
+     navigation.goBack()
+  }
+   
     
   const theme = useTheme()
   return (
      <Container>
        <Header>
-          <BackButton color={theme.colors.shape} onPress={() => {}} />
+          <BackButton color={theme.colors.shape} onPress={handleGoBack} />
           <Title>
             Escolha uma{`\n`}
             data de início e {`\n`}
