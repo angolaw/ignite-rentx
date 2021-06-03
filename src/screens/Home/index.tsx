@@ -12,6 +12,7 @@ import { useTheme } from 'styled-components'
 import Animated, {useSharedValue, useAnimatedStyle, useAnimatedGestureHandler, withSpring} from 'react-native-reanimated'
 import { RectButton, PanGestureHandler } from 'react-native-gesture-handler'
 import { StyleSheet, BackHandler } from 'react-native'
+import { LoadAnimation } from '../../components/LoadAnimation'
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton)
 
 export function Home(){
@@ -92,7 +93,7 @@ export function Home(){
       </Header>
       
       {
-      isLoading ? <Loading/> : 
+      isLoading ? <LoadAnimation/> : 
       
         <CarList 
               data={cars}

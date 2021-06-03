@@ -16,6 +16,7 @@ import { api } from '../../services/api'
 import { FlatList } from 'react-native'
 import { Car } from '../../components/Car'
 import {AntDesign} from '@expo/vector-icons'
+import { LoadAnimation } from '../../components/LoadAnimation'
 interface CarProps {
   car: CarDTO,
   id: string;
@@ -66,7 +67,7 @@ export function MyCars(){
        </RentQuantityWrapper>
 
    {    
-    loading ? <Loading/> : 
+    loading ? <LoadAnimation/> : 
    <FlatList 
         data={cars}
         keyExtractor={item => item.id}
