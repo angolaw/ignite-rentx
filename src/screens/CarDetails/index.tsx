@@ -3,12 +3,12 @@ import { BackButton } from '../../components/BackButton'
 
 import {useTheme} from 'styled-components'
 import { ImageSlider } from '../../components/ImageSlider'
-
+import Animated from 'react-native-reanimated'
 import {getAccessoryIcon} from '../../utils/getAccessoryIcon'
 import { Button } from '../../components/Button'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import {Container, Header,CarImages,
-Content,
+
 Details,
 Description,
 Brand,
@@ -53,7 +53,14 @@ export function CarDetails(){
                     <ImageSlider imagesUrl={car.photos}/>
 
         </CarImages>
-        <Content>
+        <Animated.ScrollView
+         contentContainerStyle={{
+            padding:24,
+            alignItems: 'center',
+
+         }}
+         showsVerticalScrollIndicator={false}
+        >
            <Details>
               <Description>
                  <Brand>{car.brand}</Brand>
@@ -65,22 +72,24 @@ export function CarDetails(){
               </Rent>
            </Details>
            <Accessories>
-               
+      
                {car.accessories.map((accessory) => (
                   <Accessory
                      key={accessory.type}
                   name={accessory.name} icon={getAccessoryIcon(accessory.type)} />
                ))}
                   
-
            </Accessories>
            <About>
+              {car.about}
+              {car.about}
+              {car.about}
               {car.about}
            </About>
            <Footer>
               <Button title="Escolher o periodo do aluguel" onPress={() => handleCarSchedule(car)} />
            </Footer>
-        </Content>
+        </Animated.ScrollView>
      </Container>
   )
 }
