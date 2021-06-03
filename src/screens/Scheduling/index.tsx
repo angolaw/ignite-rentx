@@ -18,6 +18,9 @@ export function Scheduling(){
    function handleGoBack() {
      navigation.goBack()
   }
+  function handleChangeDay(){
+
+  }
    
     
   const theme = useTheme()
@@ -43,7 +46,10 @@ export function Scheduling(){
           </RentalPeriod>
        </Header>
        <Content>
-        <Calendar/>
+        <Calendar
+          onDayPress={handleChangeDay}
+
+        />
        </Content>
        <Footer>
          <Button onPress={handleCarSchedulingDetails} title="Confirmar"/>

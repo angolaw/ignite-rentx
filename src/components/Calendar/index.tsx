@@ -7,7 +7,7 @@ import { ptBR } from './localeConfig'
 LocaleConfig.locales['pt-br'] = ptBR
 LocaleConfig.defaultLocale="pt-br"
 
-interface MarkedDatesProps{
+interface MarkedDateProps{
   [date:string]:{
     color: string;
     textColor: string;
@@ -16,12 +16,19 @@ interface MarkedDatesProps{
   }
 }
 interface CalendarProps {
-  markedDates: MarkedDatesProps;
+  markedDates: MarkedDateProps;
   onDayPress:DateCallbackHandler;
+}
+interface DayProps{
+  dateString: string;
+  day: string;
+  month: string;
+  year: number;
+  timestamp:number;
 }
 
 
-export function Calendar({markedDates, onDayPress}:CalendarProps){
+function Calendar({markedDates, onDayPress}:CalendarProps){
   const theme = useTheme()
   return (
     <CustomCalendar 
@@ -55,3 +62,4 @@ export function Calendar({markedDates, onDayPress}:CalendarProps){
  
   )
 }
+export {Calendar, DayProps, MarkedDateProps}
