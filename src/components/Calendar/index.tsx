@@ -26,7 +26,7 @@ export function Calendar({markedDates, onDayPress}:CalendarProps){
   return (
     <CustomCalendar 
 
-      renderArrow={(direction) => <Feather size={24} color={theme.colors.text} name={`chevron-${direction}`} /> }
+      renderArrow={(direction) => <Feather size={24} color={theme.colors.text} name={direction === 'left' ? 'chevron-left':'chevron-right'} /> }
       headerStyle={{
         backgroundColor: theme.colors.background_secondary,
         borderBottomWidth: 0.5,
