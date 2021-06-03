@@ -36,15 +36,25 @@ import People from '../../assets/people.svg'
 import Exchange from '../../assets/exchange.svg'
 import { Button } from '../../components/Button'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute} from '@react-navigation/native'
 import { Accessory } from '../../components/Accessory'
+import { CarDTO } from '../../dtos/CarDTO'
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon'
+import { format } from 'date-fns'
+import { getPlatformDate } from '../../utils/getPlatformDate'
+
+interface Params {
+   car: CarDTO;
+   [dates:string]
+}
 
 export function SchedulingDetails(){
-     const navigation = useNavigation();
-
- function handleCarSchedulingComplete(){
-    navigation.navigate('SchedulingComplete')
-  }
+   const navigation = useNavigation();
+   const routes = useRoute();
+   const {car, dates}  = routes.params as Params
+   function handleCarSchedulingComplete(){
+      navigation.navigate('SchedulingComplete')
+   }
     
 const theme = useTheme()
    
@@ -55,27 +65,28 @@ const theme = useTheme()
           
        </Header>
        <CarImages>
-         <ImageSlider imagesUrl={['https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg2.gratispng.com%2F20180704%2Fjxj%2Fkisspng-volkswagen-up-car-volkswagen-touareg-2018-volkswag-volkswagen-5b3ce033003919.9152554115307162110009.jpg&f=1&nofb=1','https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.glimport.ch%2Fdoc%2Fimages%2Fvw-up.png&f=1&nofb=1']}/>
+         <ImageSlider imagesUrl={car.photos}/>
 
        </CarImages>
        <Content>
          <Details>
             <RentCarData>
-               <Brand>Volkswagen</Brand>
-               <Model>Up! TSI</Model>
+               <Brand>{car.brand}</Brand>
+               <Model>{car.name}</Model>
             </RentCarData>
             <RentCarCost>
-               <Period>AO DIA</Period>
-               <Price>{`R$ 250`}</Price>
+               <Period>{car.rent.period}</Period>
+               <Price>{`R$ ${car.rent.price}`}</Price>
             </RentCarCost>
          </Details>
           <Accessories>
-                  <Accessory name="320km/h" icon={Speed} />
-                  <Accessory name="12km/l" icon={Gasoline} />
-                  <Accessory name="3.2s" icon={Acceleration} />
-                  <Accessory name="150HP" icon={Force} />
-                  <Accessory name="Manual" icon={Exchange} />
-                  <Accessory name="4 pessoas" icon={People} />
+               
+               {car.accessories.map((accessory) => (
+                  <Accessory
+                     key={accessory.type}
+                  name={accessory.name} icon={getAccessoryIcon(accessory.type)} />
+               ))}
+                  
 
            </Accessories>
          <RentalPeriod>
@@ -84,13 +95,13 @@ const theme = useTheme()
             </CalendarIcon> 
             <DateInfo>
                <DateTitle>DE</DateTitle>
-               <DateValue>12/07/2021</DateValue>
+               <DateValue>{format(getPlatformDate(new Date(dates[0])),'dd/MM/yyyy')}</DateValue>
             </DateInfo>
            
             <Feather name="chevron-right" size={RFValue(10)} color={theme.colors.text}/> 
              <DateInfo>
                <DateTitle>Ate</DateTitle>
-               <DateValue>19/07/2021</DateValue>
+               <DateValue>{format(getPlatformDate(new Date(dates[dates.length - 1])),'dd/MM/yyyy')}</DateValue>
             </DateInfo>
 
          </RentalPeriod>
@@ -98,8 +109,8 @@ const theme = useTheme()
          <RentalPrice>
             <RentalPriceLabel>TOTAL</RentalPriceLabel>
             <RentalPriceDetails>
-               <RentalPriceQuota>R$ 580 x3 diarias</RentalPriceQuota>
-               <RentalPriceTotal>R$ 1740.00</RentalPriceTotal>
+               <RentalPriceQuota>{`R$ ${car.rent.price} x ${dates.length} diarias`}</RentalPriceQuota>
+               <RentalPriceTotal> {`R$ ${car.rent.price * dates.length}`} </RentalPriceTotal>
             </RentalPriceDetails>
          </RentalPrice>
         
