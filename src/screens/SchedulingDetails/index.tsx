@@ -59,7 +59,9 @@ export function SchedulingDetails(){
  const routes = useRoute();
  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
  const {car, dates}  = routes.params as Params
+ const [loading, setloading] = useState(false)
  async function handleConfirmRental(){
+    setloading(true)
     //post to API
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
     const unavailable_dates = [
@@ -80,7 +82,10 @@ export function SchedulingDetails(){
     }).then(() => 
       navigation.navigate('SchedulingComplete')
 
-    ).catch(() => Alert.alert('Não foi possivel agendar'))
+    ).catch(() => {
+       setloading(false)
+       Alert.alert('Não foi possivel agendar')
+      })
 
 
  }
@@ -96,7 +101,7 @@ const theme = useTheme()
      <Container>
        <Header>
           <BackButton onPress={() => {}} />
-          
+
        </Header>
        <CarImages>
          <ImageSlider imagesUrl={car.photos}/>
@@ -151,7 +156,7 @@ const theme = useTheme()
         
        </Content>
        <Footer>
-          <Button title={"Alugar agora"} color={theme.colors.success} onPress={handleConfirmRental} />
+          <Button title={"Alugar agora"} color={theme.colors.success} onPress={handleConfirmRental} enabled={!loading} loading={loading}  />
        </Footer>
        
        
