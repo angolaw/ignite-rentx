@@ -45,7 +45,7 @@ import { getPlatformDate } from '../../utils/getPlatformDate'
 
 interface Params {
    car: CarDTO;
-   [dates:string]
+   dates:string[];
 }
 
 export function SchedulingDetails(){
