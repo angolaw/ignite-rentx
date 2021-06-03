@@ -33,6 +33,9 @@ export function Home(){
     fetchCars()
   },[])
 
+  function handleSeeMyRentedCars(){
+    navigation.navigate('MyCars ')
+  }
 
  
  
@@ -61,7 +64,9 @@ export function Home(){
           />
         
       }
-      <MyCarsButton>
+      <MyCarsButton
+        onPress={handleSeeMyRentedCars}
+      >
         <Ionicons 
           name="ios-car-sport"  
           size={32} 
