@@ -9,9 +9,19 @@ import ArrowLeft from '../../assets/arrow.svg'
 import { Button } from '../../components/Button';
 import { Calendar, DayProps, generateInterval, MarkedDateProps } from '../../components/Calendar';
 import { useNavigation } from '@react-navigation/native';
+import {format} from 'date-fns'
+import { getPlatformDate } from '../../utils/getPlatformDate';
+interface RentalPeriod{
+  start: number;
+  startFormatted:string;
+  end:number;
+  endFormatted:string;
+}
+
 export function Scheduling(){
  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps)
  const [markedDates, setMarkedDates] = useState<MarkedDateProps>({} as MarkedDateProps)
+ const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
   const navigation = useNavigation();
 
  function handleCarSchedulingDetails(){
@@ -31,6 +41,17 @@ export function Scheduling(){
     setLastSelectedDate(end)
     const interval = generateInterval(start, end)
     setMarkedDates(interval)
+    const firstDate = Object.keys(interval)[0]
+    const lastDate = Object.keys(interval)[Object.keys(interval).length - 1]
+
+    setRentalPeriod({
+      start: start.timestamp,
+      end:end.timestamp,
+      startFormatted: format(getPlatformDate(new Date(firstDate)), 'dd/MM/yyyy'),
+      endFormatted: format(getPlatformDate(new Date(lastDate)), 'dd/MM/yyyy')
+    })
+
+
   }
    
     
@@ -47,12 +68,12 @@ export function Scheduling(){
           <RentalPeriod>
             <DateInfo>
               <DateTitle>DE</DateTitle>
-              <DateValue selected={true} >18/06/2021</DateValue>
+              <DateValue selected={true} >{rentalPeriod.startFormatted}</DateValue>
             </DateInfo>
             <ArrowLeft/>
             <DateInfo>
               <DateTitle>ATÉ</DateTitle>
-              <DateValue selected={false}>12/01/2021</DateValue>
+              <DateValue selected={false}>{rentalPeriod.endFormatted}</DateValue>
             </DateInfo>
           </RentalPeriod>
        </Header>
