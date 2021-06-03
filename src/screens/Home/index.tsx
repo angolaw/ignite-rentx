@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CarList, Container, Header, HeaderContent, TotalCars } from './styles'
+import { CarList, Container, Header, HeaderContent, MyCarsButton, TotalCars } from './styles'
 import Logo from '../../assets/logo.svg'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Car, } from '../../components/Car'
@@ -7,11 +7,14 @@ import { useNavigation } from '@react-navigation/core'
 import {api} from '../../services/api'
 import { CarDTO } from '../../dtos/CarDTO'
 import {Loading} from '../../components/Loading'
+import {Ionicons} from '@expo/vector-icons'
+import { useTheme } from 'styled-components'
 
 export function Home(){
   const navigation = useNavigation();
   const [cars, setCars] = useState<CarDTO[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const theme = useTheme()
   useEffect(()=>{
     async function fetchCars(){
       try {
@@ -58,7 +61,12 @@ export function Home(){
           />
         
       }
-     
+      <MyCarsButton>
+        <Ionicons 
+          name="ios-car-sport"  
+          size={32} 
+          color={theme.colors.shape}/>
+      </MyCarsButton>
       
     
       
