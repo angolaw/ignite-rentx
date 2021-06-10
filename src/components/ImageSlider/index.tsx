@@ -1,13 +1,7 @@
 import React, { useRef, useState } from "react";
 import { FlatList, ViewToken } from "react-native";
 import { Bullet } from "../Bullet";
-import {
-  Container,
-  ImageIndexes,
-  ImageIndex,
-  CarImagesWrapper,
-  CarImage,
-} from "./styles";
+import { Container, ImageIndexes, CarImagesWrapper, CarImage } from "./styles";
 interface ImageSliderProps {
   imagesUrl: string[];
 }
