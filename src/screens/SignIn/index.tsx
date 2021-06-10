@@ -4,12 +4,15 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import { useTheme } from "styled-components";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import { Footer, Container, Header, Subtitle, Title, Form } from "./styles";
+//yup
+import * as Yup from "yup";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -18,21 +21,24 @@ export function SignIn() {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
-  function validateEmail(email: string) {
-    const res =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setIsEmailValid(res.test(String(email).toLowerCase()));
-    if (isEmailValid) {
-      setEmail(email);
-    }
-  }
-  function validatePassword(password: string) {
-    //size >=6
-    if (password.length > 5) {
-      setIsPasswordValid(true);
-    }
-    if (isPasswordValid) {
-      setPassword(password);
+  async function handleSignIn() {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required("O email é obrigatório")
+          .email("Digite um email válido"),
+        password: Yup.string()
+          .required("A senha é obrigatória")
+          .min(6, "Necessário uma senha forte"),
+      });
+
+      await schema.validate({ email, password });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert("Opa", error.message);
+      } else {
+        Alert.alert("Erro na autenticação", "Algo errado não está certo");
+      }
     }
   }
 
@@ -59,14 +65,14 @@ export function SignIn() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
-              onChangeText={validateEmail}
+              onChangeText={setEmail}
               value={email}
             />
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
               autoCorrect={false}
-              onChangeText={validatePassword}
+              onChangeText={setPassword}
               autoCapitalize="none"
               value={password}
             />
@@ -75,8 +81,8 @@ export function SignIn() {
           <Footer>
             <Button
               title="Login"
-              onPress={() => {}}
-              enabled={isFormValid}
+              onPress={handleSignIn}
+              enabled={true}
               loading={false}
             />
             <Button
