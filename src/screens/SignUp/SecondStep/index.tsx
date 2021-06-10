@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { BackButton } from "../../../components/BackButton";
 import { Button } from "../../../components/Button";
 import { PasswordInput } from "../../../components/PasswordInput";
-import { Container, Footer, Form, Header, Title } from "./styles";
+import {
+  Container,
+  Footer,
+  Form,
+  Header,
+  Step,
+  Subtitle,
+  Title,
+} from "./styles";
 import * as Yup from "yup";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -38,8 +46,10 @@ export function SecondStep() {
       <Header>
         <BackButton onPress={handleGoBack} />
       </Header>
+      <Title>Crie sua {"\n"}conta</Title>
+      <Subtitle>Faça seu cadastro de{"\n"}forma rápida e fácil</Subtitle>
       <Form>
-        <Title>2.Senha</Title>
+        <Step>2.Senha</Step>
         <PasswordInput
           iconName="lock"
           placeholder="Senha"
@@ -50,7 +60,7 @@ export function SecondStep() {
         />
         <PasswordInput
           iconName="lock"
-          placeholder="Confirmar a senha"
+          placeholder="Repetir senha"
           autoCorrect={false}
           onChangeText={setPasswordConfirmation}
           autoCapitalize="none"
