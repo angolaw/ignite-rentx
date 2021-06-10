@@ -6,21 +6,33 @@ import { TextInputProps } from "react-native";
 
 interface InputProps extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>["name"];
-  fieldValid: boolean;
 }
 
-export function Input({ iconName, fieldValid, ...rest }: InputProps) {
+export function Input({ iconName, ...rest }: InputProps) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
+  function handleInputFocus() {
+    setIsFocused(true);
+  }
+  function handleInputBlur() {
+    setIsFocused(false);
+  }
   const theme = useTheme();
   return (
-    <Container>
+    <Container isFocused={isFocused}>
       <IconContainer>
         <Feather
           name={iconName}
           size={24}
-          color={fieldValid ? theme.colors.main : theme.colors.title}
+          color={isFocused ? theme.colors.main : theme.colors.title}
         />
       </IconContainer>
-      <InputText {...rest} />
+      <InputText
+        {...rest}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+      />
     </Container>
   );
 }

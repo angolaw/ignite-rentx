@@ -14,9 +14,9 @@ import { Footer, Container, Header, Subtitle, Title, Form } from "./styles";
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [formValid, setFormValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   function validateEmail(email: string) {
     const res =
@@ -58,9 +58,9 @@ export function SignIn() {
               placeholder="E-mail"
               keyboardType="email-address"
               autoCorrect={false}
-              fieldValid={isEmailValid}
               autoCapitalize="none"
               onChangeText={validateEmail}
+              value={email}
             />
             <PasswordInput
               iconName="lock"
@@ -69,6 +69,7 @@ export function SignIn() {
               fieldValid={isPasswordValid}
               onChangeText={validatePassword}
               autoCapitalize="none"
+              value={password}
             />
           </Form>
 
@@ -76,7 +77,7 @@ export function SignIn() {
             <Button
               title="Login"
               onPress={() => {}}
-              enabled={false}
+              enabled={isFormValid}
               loading={false}
             />
             <Button
