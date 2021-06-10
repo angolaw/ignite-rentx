@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { BackButton } from "../../../components/BackButton";
 import { Input } from "../../../components/Input";
-import { Container, Title, Header, Form, Footer } from "./styles";
+import {
+  Container,
+  Step,
+  Header,
+  Form,
+  Footer,
+  Steps,
+  Title,
+  Subtitle,
+} from "./styles";
 import * as Yup from "yup";
 import { Button } from "../../../components/Button";
 import {
@@ -12,11 +21,26 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Bullet } from "../../../components/Bullet";
+
+interface PageProps {
+  name: string;
+  position: number;
+}
+
 export function FirstStep() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cnh, setcnh] = useState("");
   const navigation = useNavigation();
+
+  const pages = [
+    {
+      name: "FirstStep",
+      position: 0,
+    },
+    { name: "SecondStep", position: 1 },
+  ];
+
   async function handleNextStep() {
     try {
       const schema = Yup.object().shape({
@@ -48,10 +72,17 @@ export function FirstStep() {
         <Container>
           <Header>
             <BackButton onPress={handleGoBack} />
-            <Bullet active={false} />
+            {/**iterate over pages and activate when index == page pos */}
+            <Steps>
+              <Bullet active />
+              <Bullet />
+            </Steps>
           </Header>
+
+          <Title>Crie sua {"\n"}conta</Title>
+          <Subtitle>Faça seu cadastro de{"\n"}forma rápida e fácil</Subtitle>
           <Form>
-            <Title>1.Dados</Title>
+            <Step>1.Dados</Step>
             <Input
               iconName="user"
               autoCorrect={false}
