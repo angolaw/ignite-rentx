@@ -14,7 +14,7 @@ import {
 } from "./styles";
 import * as Yup from "yup";
 import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Bullet } from "../../../components/Bullet";
 import { useTheme } from "styled-components";
 
@@ -26,10 +26,11 @@ interface Params {
   };
 }
 
-export function SecondStep({ route }) {
+export function SecondStep() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [equality, setEquality] = useState(false);
+  const route = useRoute();
   const { user } = route.params as Params;
   const navigation = useNavigation();
   const theme = useTheme();
@@ -91,9 +92,9 @@ export function SecondStep({ route }) {
 
         <Footer>
           <Button
-            title="Próximo"
+            title="Confirmar"
             onPress={handleSignUp}
-            color={equality ? theme.colors.success : ""}
+            color={theme.colors.success}
           />
         </Footer>
       </Form>
