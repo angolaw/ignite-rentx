@@ -11,6 +11,7 @@ export interface SuccessProps {
   data: {
     title: string;
     message?: string;
+    navigateTo: string;
   };
 }
 
@@ -20,7 +21,7 @@ export function Success() {
   const route = useRoute();
   const { data } = route.params as SuccessProps;
   function handleCarSchedulingHome() {
-    navigation.navigate("Home");
+    navigation.navigate(data.navigateTo);
   }
 
   return (

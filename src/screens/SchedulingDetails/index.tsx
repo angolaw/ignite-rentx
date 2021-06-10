@@ -86,6 +86,7 @@ export function SchedulingDetails() {
         const pageData = {
           title: "Feito",
           message: "Agora suas informações",
+          navigateTo: "Home",
         };
         navigation.navigate("Success", { data: pageData });
       })

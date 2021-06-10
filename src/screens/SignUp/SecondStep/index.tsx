@@ -49,7 +49,8 @@ export function SecondStep() {
       const result = await schema.validate({ password, passwordConfirmation });
       const pageData = {
         title: "Conta criada",
-        message: "",
+        message: "Agora é só realizar o login",
+        navigateTo: "SignIn",
       };
       navigation.navigate("Success", { data: pageData });
     } catch (error) {
