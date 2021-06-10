@@ -37,13 +37,16 @@ export function FirstStep() {
       }
     }
   }
+  function handleGoBack() {
+    navigation.goBack();
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <Header>
-            <BackButton />
+            <BackButton onPress={handleGoBack} />
           </Header>
           <Form>
             <Title>1.Dados</Title>

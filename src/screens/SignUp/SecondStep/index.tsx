@@ -5,10 +5,11 @@ import { PasswordInput } from "../../../components/PasswordInput";
 import { Container, Footer, Form, Header, Title } from "./styles";
 import * as Yup from "yup";
 import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 export function SecondStep() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
+  const navigation = useNavigation();
   async function handleSignUp() {
     try {
       const schema = Yup.object().shape({
@@ -29,11 +30,13 @@ export function SecondStep() {
       }
     }
   }
-
+  function handleGoBack() {
+    navigation.goBack();
+  }
   return (
     <Container>
       <Header>
-        <BackButton />
+        <BackButton onPress={handleGoBack} />
       </Header>
       <Form>
         <Title>2.Senha</Title>
