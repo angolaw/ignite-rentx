@@ -10,11 +10,12 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 export function FirstStep() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cnh, setcnh] = useState("");
-
+  const navigation = useNavigation();
   async function handleNextStep() {
     try {
       const schema = Yup.object().shape({
@@ -27,6 +28,7 @@ export function FirstStep() {
           .min(6, "Necessário uma CNH válida"),
       });
       await schema.validate({ name, email, cnh });
+      navigation.navigate("SecondStep");
     } catch (e) {
       if (e instanceof Yup.ValidationError) {
         Alert.alert("Opa", e.message);
