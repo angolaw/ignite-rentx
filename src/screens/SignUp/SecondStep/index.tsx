@@ -33,6 +33,7 @@ export function SecondStep() {
   const { user } = route.params as Params;
   const navigation = useNavigation();
   const theme = useTheme();
+  const [isEqual, setIsEqual] = useState(false);
 
   async function handleSignUp() {
     try {
@@ -45,7 +46,9 @@ export function SecondStep() {
           .required("Insira a senha")
           .min(6, "Insira uma senha forte com no mínimo 6 caracteres"),
       });
-      await schema.validate({ password, passwordConfirmation });
+      const result = await schema.validate({ password, passwordConfirmation });
+      setIsEqual(result.password === result.passwordConfirmation);
+      console.log(result);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
@@ -91,7 +94,7 @@ export function SecondStep() {
           <Button
             title="Confirmar"
             onPress={handleSignUp}
-            color={theme.colors.success}
+            color={isEqual ? theme.colors.success : theme.colors.main}
           />
         </Footer>
       </Form>
