@@ -3,16 +3,23 @@ import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-    padding: 0 24px;
+  padding: 0 24px;
 
 `
 export const Header = styled.View`
   margin-top: ${getStatusBarHeight()+32}px;
+    flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
 `;
 export const Form = styled.View`
 `;
-
+export const Steps = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+`;
 export const Step = styled.Text`
   margin-top: 48px;
   margin-bottom:24px;

@@ -8,16 +8,24 @@ import {
   Form,
   Header,
   Step,
+  Steps,
   Subtitle,
   Title,
 } from "./styles";
 import * as Yup from "yup";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Bullet } from "../../../components/Bullet";
+import { useTheme } from "styled-components";
+
 export function SecondStep() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [equality, setEquality] = useState(false);
+
   const navigation = useNavigation();
+  const theme = useTheme();
+
   async function handleSignUp() {
     try {
       const schema = Yup.object().shape({
@@ -30,6 +38,7 @@ export function SecondStep() {
           .oneOf([Yup.ref("password"), null], "As senhas devem ser coincidir"),
       });
       await schema.validate({ password, passwordConfirmation });
+      setEquality(true);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
@@ -45,11 +54,15 @@ export function SecondStep() {
     <Container>
       <Header>
         <BackButton onPress={handleGoBack} />
+        <Steps>
+          <Bullet />
+          <Bullet active />
+        </Steps>
       </Header>
       <Title>Crie sua {"\n"}conta</Title>
       <Subtitle>Faça seu cadastro de{"\n"}forma rápida e fácil</Subtitle>
       <Form>
-        <Step>2.Senha</Step>
+        <Step>2. Senha</Step>
         <PasswordInput
           iconName="lock"
           placeholder="Senha"
@@ -68,7 +81,11 @@ export function SecondStep() {
         />
 
         <Footer>
-          <Button title="Próximo" onPress={handleSignUp} />
+          <Button
+            title="Próximo"
+            onPress={handleSignUp}
+            color={equality ? theme.colors.success : ""}
+          />
         </Footer>
       </Form>
     </Container>
