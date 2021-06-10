@@ -38,13 +38,13 @@ export function SecondStep({ route }) {
   async function handleSignUp() {
     try {
       const schema = Yup.object().shape({
-        password: Yup.string()
-          .required("Insira a senha")
-          .min(6, "Insira uma senha forte com no mínimo 6 caracteres"),
         passwordConfirmation: Yup.string()
           .required("Insira a confirmação da senha")
           .min(6, "Insira uma senha forte com no mínimo 6 caracteres")
           .oneOf([Yup.ref("password"), null], "As senhas devem ser coincidir"),
+        password: Yup.string()
+          .required("Insira a senha")
+          .min(6, "Insira uma senha forte com no mínimo 6 caracteres"),
       });
       await schema.validate({ password, passwordConfirmation });
       setEquality(true);

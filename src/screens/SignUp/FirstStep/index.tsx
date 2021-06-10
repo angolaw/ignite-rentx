@@ -36,13 +36,13 @@ export function FirstStep() {
   async function handleNextStep() {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().required("O nome é obrigatório"),
-        email: Yup.string()
-          .required("O email é obrigatório")
-          .email("O email deve ser válido"),
         cnh: Yup.string()
           .required("A CNH é obrigatória")
           .min(6, "Necessário uma CNH válida"),
+        email: Yup.string()
+          .required("O email é obrigatório")
+          .email("O email deve ser válido"),
+        name: Yup.string().required("O nome é obrigatório"),
       });
       await schema.validate({ name, email, cnh });
       const data = { name, email, cnh };
