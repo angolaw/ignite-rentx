@@ -83,11 +83,9 @@ export function SchedulingDetails() {
         unavailable_dates,
       })
       .then(() => {
-        const pageData: SuccessProps = {
-          data: {
-            title: "Feito",
-            message: "Agora suas informações",
-          },
+        const pageData = {
+          title: "Feito",
+          message: "Agora suas informações",
         };
         navigation.navigate("Success", { data: pageData });
       })
