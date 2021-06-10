@@ -66,6 +66,8 @@ export function SignIn() {
               iconName="lock"
               placeholder="Senha"
               autoCorrect={false}
+              fieldValid={isPasswordValid}
+              onChangeText={validatePassword}
               autoCapitalize="none"
             />
           </Form>
