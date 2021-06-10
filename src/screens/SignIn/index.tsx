@@ -21,8 +21,8 @@ export function SignIn() {
         </Subtitle>
       </Header>
       <Form>
-        <Input iconName="mail" />
-        <Input iconName="lock" />
+        <Input iconName="mail" placeholder="E-mail" />
+        <Input iconName="lock" placeholder="Senha" />
       </Form>
 
       <Footer>

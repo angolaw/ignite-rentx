@@ -32,4 +32,5 @@ export const Footer = styled.View``;
 export const Form = styled.View`
   width: 100%;
   margin: 64px 0;
+  height: 200px;
 `;
