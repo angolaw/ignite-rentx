@@ -1,4 +1,5 @@
 import { TextInput } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
@@ -31,4 +32,6 @@ export const Visibility = styled.View`
   justify-content:center;
   align-items:center;
   background-color: ${({theme})=>theme.colors.background_secondary};
+`;
+export const ChangePasswordVisibility = styled(BorderlessButton)`
 `;
