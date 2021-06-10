@@ -85,7 +85,7 @@ export function SchedulingDetails() {
       .then(() => {
         const pageData = {
           title: "Carro alugado!",
-          message: `Agora você só precisa ir\naté a concessionária da RENTX`,
+          message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar seu automóvel`,
           navigateTo: "Home",
         };
         navigation.navigate("Success", { data: pageData });
