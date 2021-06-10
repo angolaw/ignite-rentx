@@ -18,13 +18,22 @@ import { useNavigation } from "@react-navigation/native";
 import { Bullet } from "../../../components/Bullet";
 import { useTheme } from "styled-components";
 
-export function SecondStep() {
+interface Params {
+  user: {
+    name: string;
+    email: string;
+    cnh: string;
+  };
+}
+
+export function SecondStep({ route }) {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [equality, setEquality] = useState(false);
-
+  const { user } = route.params as Params;
   const navigation = useNavigation();
   const theme = useTheme();
+  console.log(user);
 
   async function handleSignUp() {
     try {
