@@ -27,3 +27,4 @@ export const Subtitle = styled.Text`
   line-height: ${RFValue(25)}px;
   margin-top: ${RFValue(16)}px;
 `;
+export const Footer = styled.View``;
