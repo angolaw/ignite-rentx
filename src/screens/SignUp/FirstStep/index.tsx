@@ -45,7 +45,8 @@ export function FirstStep() {
           .min(6, "Necessário uma CNH válida"),
       });
       await schema.validate({ name, email, cnh });
-      navigation.navigate("SecondStep");
+      const data = { name, email, cnh };
+      navigation.navigate("SecondStep", { user: data });
     } catch (e) {
       if (e instanceof Yup.ValidationError) {
         Alert.alert("Opa", e.message);
