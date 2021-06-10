@@ -33,14 +33,6 @@ export function FirstStep() {
   const [cnh, setcnh] = useState("");
   const navigation = useNavigation();
 
-  const pages = [
-    {
-      name: "FirstStep",
-      position: 0,
-    },
-    { name: "SecondStep", position: 1 },
-  ];
-
   async function handleNextStep() {
     try {
       const schema = Yup.object().shape({
@@ -95,6 +87,7 @@ export function FirstStep() {
               iconName="mail"
               autoCorrect={false}
               autoCapitalize="none"
+              keyboardType="email-address"
               value={email}
               placeholder="Email"
               onChangeText={setEmail}
@@ -103,14 +96,15 @@ export function FirstStep() {
               iconName="credit-card"
               autoCorrect={false}
               autoCapitalize="none"
+              keyboardType="numeric"
               value={cnh}
               placeholder="CNH"
               onChangeText={setcnh}
             />
-            <Footer>
-              <Button title="Próximo" onPress={handleNextStep} />
-            </Footer>
           </Form>
+          <Footer>
+            <Button title="Próximo" onPress={handleNextStep} />
+          </Footer>
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
