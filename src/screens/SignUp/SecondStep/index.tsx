@@ -17,6 +17,7 @@ import { Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Bullet } from "../../../components/Bullet";
 import { useTheme } from "styled-components";
+import { SuccessProps } from "../../Success";
 
 interface Params {
   user: {
@@ -33,7 +34,6 @@ export function SecondStep() {
   const { user } = route.params as Params;
   const navigation = useNavigation();
   const theme = useTheme();
-  const [isEqual, setIsEqual] = useState(false);
 
   async function handleSignUp() {
     try {
@@ -47,8 +47,11 @@ export function SecondStep() {
           .min(6, "Insira uma senha forte com no mínimo 6 caracteres"),
       });
       const result = await schema.validate({ password, passwordConfirmation });
-      setIsEqual(result.password === result.passwordConfirmation);
-      console.log(result);
+      const pageData = {
+        title: "Conta criada",
+        message: "",
+      };
+      navigation.navigate("Success", { data: pageData });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
@@ -94,7 +97,7 @@ export function SecondStep() {
           <Button
             title="Confirmar"
             onPress={handleSignUp}
-            color={isEqual ? theme.colors.success : theme.colors.main}
+            color={theme.colors.success}
           />
         </Footer>
       </Form>
