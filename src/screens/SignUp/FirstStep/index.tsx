@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Bullet } from "../../../components/Bullet";
 export function FirstStep() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,6 +48,7 @@ export function FirstStep() {
         <Container>
           <Header>
             <BackButton onPress={handleGoBack} />
+            <Bullet active={false} />
           </Header>
           <Form>
             <Title>1.Dados</Title>

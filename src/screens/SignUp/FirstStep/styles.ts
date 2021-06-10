@@ -7,6 +7,10 @@ export const Container = styled.View`
 `
 export const Header = styled.View`
   margin-top: ${getStatusBarHeight()+32}px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
 
 `;
 export const Form = styled.View`
