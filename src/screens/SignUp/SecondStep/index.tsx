@@ -29,12 +29,10 @@ interface Params {
 export function SecondStep() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [equality, setEquality] = useState(false);
   const route = useRoute();
   const { user } = route.params as Params;
   const navigation = useNavigation();
   const theme = useTheme();
-  console.log(user);
 
   async function handleSignUp() {
     try {
@@ -48,7 +46,6 @@ export function SecondStep() {
           .min(6, "Insira uma senha forte com no mínimo 6 caracteres"),
       });
       await schema.validate({ password, passwordConfirmation });
-      setEquality(true);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
