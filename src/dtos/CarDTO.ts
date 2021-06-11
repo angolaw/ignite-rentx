@@ -1,12 +1,10 @@
 
 interface Accessory{
+  id:string;
   name:string;
   type:string;
 }
-interface Rent{
-  period: string;
-  price: number;
-}
+
 export interface CarDTO{
     about:string;
     accessories:Accessory[];
@@ -14,7 +12,11 @@ export interface CarDTO{
     fuel_type: string;
     id:string;
     name:string;
-    photos:string[];
-    rent: Rent;
+    photos:{
+      id: string;
+      photo:string;
+    };
+    period: string;
+    price: number;
     thumbnail: string;
 }

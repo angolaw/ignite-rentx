@@ -3,7 +3,10 @@ import { FlatList, ViewToken } from "react-native";
 import { Bullet } from "../Bullet";
 import { Container, ImageIndexes, CarImagesWrapper, CarImage } from "./styles";
 interface ImageSliderProps {
-  imagesUrl: string[];
+  imagesUrl: {
+    id: string;
+    photo: string;
+  }[];
 }
 interface ChangeImageProps {
   viewableItems: ViewToken[];
@@ -20,7 +23,7 @@ export function ImageSlider({ imagesUrl }: ImageSliderProps) {
     <Container>
       <ImageIndexes>
         {imagesUrl.map((item, index) => (
-          <Bullet key={String(item)} active={imageIndex === index} />
+          <Bullet key={String(item.id)} active={imageIndex === index} />
         ))}
       </ImageIndexes>
       <FlatList
@@ -28,10 +31,10 @@ export function ImageSlider({ imagesUrl }: ImageSliderProps) {
         horizontal
         onViewableItemsChanged={indexChanged.current}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => String(item)}
+        keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
           <CarImagesWrapper>
-            <CarImage source={{ uri: item }} resizeMode="contain" />
+            <CarImage source={{ uri: item.photo }} resizeMode="contain" />
           </CarImagesWrapper>
         )}
       />
