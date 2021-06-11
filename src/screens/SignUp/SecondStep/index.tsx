@@ -18,6 +18,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Bullet } from "../../../components/Bullet";
 import { useTheme } from "styled-components";
 import { SuccessProps } from "../../Success";
+import { api } from "../../../services/api";
 
 interface Params {
   user: {
@@ -46,13 +47,26 @@ export function SecondStep() {
           .required("Insira a senha")
           .min(6, "Insira uma senha forte com no mínimo 6 caracteres"),
       });
-      const result = await schema.validate({ password, passwordConfirmation });
+      await schema.validate({ password, passwordConfirmation });
       const pageData = {
         title: "Conta criada",
         message: "Agora é só realizar o login",
         navigateTo: "SignIn",
       };
-      navigation.navigate("Success", { data: pageData });
+      //send to API
+      await api
+        .post("/users", {
+          name: user.name,
+          email: user.email,
+          driver_license: user.cnh,
+          password,
+        })
+        .then(() => {
+          navigation.navigate("Success", { data: pageData });
+        })
+        .catch(() => {
+          Alert.alert("Opa", "Não foi possível cadastrar");
+        });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
