@@ -36,6 +36,10 @@ function AuthProvider({ children }: AuthProviderProps) {
     const response = await api.post("/sessions", { email, password });
     console.log(response.data);
     //setData
+    const { token, user } = response.data;
+    //faz nossa api conhecer o user autenticado
+    api.defaults.headers.authorization = `Bearer ${token}`;
+    setData({ token, user });
   }
   return (
     <AuthContext.Provider value={{ user: data.user, signIn }}>

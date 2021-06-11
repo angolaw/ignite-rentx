@@ -14,11 +14,13 @@ import { Footer, Container, Header, Subtitle, Title, Form } from "./styles";
 //yup
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   function handleSignUp() {
     navigation.navigate("FirstStep");
@@ -36,6 +38,7 @@ export function SignIn() {
       });
 
       await schema.validate({ email, password });
+      await signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
