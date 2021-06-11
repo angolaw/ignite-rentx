@@ -38,7 +38,9 @@ export function SignIn() {
       });
 
       await schema.validate({ email, password });
-      await signIn({ email, password });
+      await signIn({ email, password }).then(() => {
+        navigation.navigate("Home");
+      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
