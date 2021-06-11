@@ -79,7 +79,10 @@ export function CarDetails() {
         ]}
       >
         <Header>
-          <BackButton color={theme.colors.shape_dark} onPress={handleGoBack} />
+          <BackButton
+            color={theme.colors.shape_dark}
+            onPress={() => handleGoBack}
+          />
         </Header>
         <Animated.View style={[sliderCarsStyleAnimation]}>
           <CarImages>
