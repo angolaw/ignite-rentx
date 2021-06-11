@@ -15,7 +15,7 @@ export interface CarDTO{
     photos:{
       id: string;
       photo:string;
-    };
+    }[];
     period: string;
     price: number;
     thumbnail: string;
