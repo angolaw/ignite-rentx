@@ -11,6 +11,7 @@ import { SecondStep } from "../screens/SignUp/SecondStep";
 
 const { Navigator, Screen } = createStackNavigator();
 
+//acesso quando nao logado
 export function AuthRoutes() {
   return (
     <Navigator headerMode="none" initialRouteName="Splash">

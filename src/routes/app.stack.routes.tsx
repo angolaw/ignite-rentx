@@ -14,9 +14,10 @@ const { Navigator, Screen } = createStackNavigator();
 export function AppStackRoutes() {
   return (
     <Navigator headerMode="none" initialRouteName="Home">
+      <Screen name="Splash" component={Splash} />
       <Screen
         name="Home"
-        component={Home}
+        component={AppStackRoutes}
         options={{
           gestureEnabled: false,
         }}
