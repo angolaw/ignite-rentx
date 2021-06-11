@@ -55,19 +55,28 @@ export function Home() {
     },
   });
   useEffect(() => {
+    //cleanup useEffect
+    let isMounted = true;
+
     async function fetchCars() {
       try {
         const response = await api.get("/cars");
         const data = response ? response.data : [];
-
-        setCars(data);
+        if (isMounted) {
+          setCars(data);
+        }
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     }
     fetchCars();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   function handleSeeMyRentedCars() {
