@@ -11,6 +11,10 @@ import {
   PhotoContainer,
   Photo,
   PhotoButton,
+  Content,
+  Options,
+  Option,
+  OptionTitle,
 } from "./styles";
 import { Feather } from "@expo/vector-icons";
 export function Profile() {
@@ -47,6 +51,16 @@ export function Profile() {
           </PhotoButton>
         </PhotoContainer>
       </Header>
+      <Content>
+        <Options>
+          <Option active>
+            <OptionTitle active>Dados</OptionTitle>
+          </Option>
+          <Option active={false}>
+            <OptionTitle active={false}>Trocar senha</OptionTitle>
+          </Option>
+        </Options>
+      </Content>
     </Container>
   );
 }
