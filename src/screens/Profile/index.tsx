@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import { BackButton } from "../../components/BackButton";
 import {
@@ -24,6 +24,8 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
+  Alert,
 } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { PasswordInput } from "../../components/PasswordInput";
@@ -33,8 +35,25 @@ export function Profile() {
   const navigation = useNavigation();
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
   const { user } = useAuth();
-  const [userImage, setUserImage] = useState(user.avatar);
+  const [userImage, setUserImage] = useState(
+    user.avatar || "https://avatars.githubusercontent.com/u/46244572?v=4"
+  );
 
+  //handle Camera/Library permission
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          Alert.alert(
+            "Ops",
+            "Sorry, we need camera roll permissions to make this work!"
+          );
+        }
+      }
+    })();
+  }, []);
   //user  data
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
@@ -72,16 +91,10 @@ export function Profile() {
             <PhotoContainer>
               <Photo
                 source={{
-                  uri:
-                    userImage ||
-                    "https://avatars.githubusercontent.com/u/46244572?v=4",
+                  uri: userImage,
                 }}
               />
-              <PhotoButton
-                onPress={() => {
-                  handleSelectAvatar;
-                }}
-              >
+              <PhotoButton onPress={handleSelectAvatar}>
                 <Feather
                   name="camera"
                   size={24}
