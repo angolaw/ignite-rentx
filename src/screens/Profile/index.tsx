@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "styled-components";
 import { BackButton } from "../../components/BackButton";
 import {
@@ -20,6 +20,7 @@ import { Feather } from "@expo/vector-icons";
 export function Profile() {
   const theme = useTheme();
   const navigation = useNavigation();
+  const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
 
   function handleGoBack() {
     navigation.goBack();
@@ -53,11 +54,19 @@ export function Profile() {
       </Header>
       <Content>
         <Options>
-          <Option active>
-            <OptionTitle active>Dados</OptionTitle>
+          <Option
+            active={option === "dataEdit"}
+            onPress={() => setOption("dataEdit")}
+          >
+            <OptionTitle active={option === "dataEdit"}>Dados</OptionTitle>
           </Option>
-          <Option active={false}>
-            <OptionTitle active={false}>Trocar senha</OptionTitle>
+          <Option
+            active={option === "passwordEdit"}
+            onPress={() => setOption("passwordEdit")}
+          >
+            <OptionTitle active={option === "passwordEdit"}>
+              Trocar senha
+            </OptionTitle>
           </Option>
         </Options>
       </Content>
