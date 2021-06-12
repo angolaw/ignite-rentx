@@ -30,11 +30,15 @@ import {
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { PasswordInput } from "../../components/PasswordInput";
 import * as ImagePicker from "expo-image-picker";
+import { Button } from "../../components/Button";
+import * as Yup from "yup";
 export function Profile() {
   const theme = useTheme();
   const navigation = useNavigation();
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
-  const { user } = useAuth();
+  const { user, signOut, updateUser } = useAuth();
+  const [name, setName] = useState(user.name);
+  const [driverLicense, setDriverLicense] = useState(user.driver_license);
   const [userImage, setUserImage] = useState(
     user.avatar || "https://avatars.githubusercontent.com/u/46244572?v=4"
   );
@@ -55,12 +59,36 @@ export function Profile() {
     })();
   }, []);
   //user  data
-  const [name, setName] = useState(user.name);
-  const [driverLicense, setDriverLicense] = useState(user.driver_license);
   function handleGoBack() {
     navigation.goBack();
   }
-  function logOut() {}
+  async function handleProfileUpdate() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required("CNH é obrigatória"),
+        name: Yup.string().required("Nome é obrigatório"),
+      });
+      const data = { name, driverLicense };
+      await schema.validate(data).then(() => {
+        updateUser({
+          id: user.id,
+          user_id: user.user_id,
+          name,
+          email: user.email,
+          driver_license: driverLicense,
+          avatar: userImage,
+          token: user.token,
+        });
+        Alert.alert("Perfil atualizado com sucesso!");
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert("Opa", error.message);
+      }
+      Alert.alert("Opa", "Não foi possível salvar o perfil");
+    }
+  }
+
   async function handleSelectAvatar() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -75,6 +103,25 @@ export function Profile() {
       setUserImage(result.uri);
     }
   }
+  async function handleSignOut() {
+    Alert.alert(
+      "Tem certeza?",
+      "Se deslogar do app, precisará de internet para conectar-se novamente",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Sair",
+          onPress: () => {
+            signOut();
+          },
+        },
+      ]
+    );
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -84,7 +131,7 @@ export function Profile() {
             <HeaderTop>
               <BackButton color={theme.colors.shape} onPress={handleGoBack} />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={logOut}>
+              <LogoutButton onPress={handleSignOut}>
                 <Feather name="power" size={24} color={theme.colors.shape} />
               </LogoutButton>
             </HeaderTop>
@@ -160,6 +207,7 @@ export function Profile() {
                 />
               </Section>
             )}
+            <Button title="Salvar alterações" onPress={handleProfileUpdate} />
           </Content>
         </Container>
       </TouchableWithoutFeedback>

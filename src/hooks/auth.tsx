@@ -23,6 +23,7 @@ interface AuthContextData {
   user: User;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => Promise<void>;
+  updateUser: (user: User) => Promise<void>;
 }
 interface SignInCredentials {
   email: string;
@@ -72,6 +73,22 @@ function AuthProvider({ children }: AuthProviderProps) {
       throw new Error(e);
     }
   }
+  async function updateUser(user: User) {
+    try {
+      const userCollection = database.get<ModelUser>("users");
+      await database.action(async () => {
+        const userSelected = await userCollection.find(user.id);
+        await userSelected.update((userData) => {
+          userData.name = user.name;
+          userData.avatar = user.avatar;
+          userData.driver_license = user.driver_license;
+        });
+      });
+      setData(user);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
   useEffect(() => {
     async function loadUserData() {
       const userCollection = database.get<ModelUser>("users");
@@ -85,7 +102,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     loadUserData();
   }, []);
   return (
-    <AuthContext.Provider value={{ user: data, signIn, signOut }}>
+    <AuthContext.Provider value={{ user: data, signIn, signOut, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
