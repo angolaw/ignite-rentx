@@ -27,13 +27,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { LoadAnimation } from "../../components/LoadAnimation";
 import { getPlatformDate } from "../../utils/getPlatformDate";
 import { format } from "date-fns";
-interface CarProps {
-  car: CarDTO;
-  id: string;
-  user_id: string;
-  startDate: string;
-  endDate: string;
-}
+import { useIsFocused } from "@react-navigation/native";
+
 interface DataProps {
   id: string;
   car: ModelCar;
@@ -44,7 +39,7 @@ export function MyCars() {
   const theme = useTheme();
   const [cars, setCars] = useState<DataProps[]>([]);
   const [loading, setloading] = useState(true);
-
+  const screenIsFocused = useIsFocused();
   async function loadCars() {
     try {
       const response = await api.get("/rentals");
@@ -73,7 +68,7 @@ export function MyCars() {
   }
   useEffect(() => {
     loadCars();
-  }, []);
+  }, [screenIsFocused]);
 
   const navigation = useNavigation();
   function handleGoBack() {
