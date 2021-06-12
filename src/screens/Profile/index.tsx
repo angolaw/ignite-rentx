@@ -32,6 +32,8 @@ import { PasswordInput } from "../../components/PasswordInput";
 import * as ImagePicker from "expo-image-picker";
 import { Button } from "../../components/Button";
 import * as Yup from "yup";
+import { useNetInfo } from "@react-native-community/netinfo";
+
 export function Profile() {
   const theme = useTheme();
   const navigation = useNavigation();
@@ -39,6 +41,7 @@ export function Profile() {
   const { user, signOut, updateUser } = useAuth();
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
+  const netInfo = useNetInfo();
   const [userImage, setUserImage] = useState(
     user.avatar || "https://avatars.githubusercontent.com/u/46244572?v=4"
   );
@@ -197,12 +200,16 @@ export function Profile() {
               </Section>
             ) : (
               <Section>
-                <PasswordInput iconName="lock" placeholder="Senha atual" />
-                <PasswordInput iconName="lock" placeholder="Nova senha" />
-                <PasswordInput
-                  iconName="lock"
-                  placeholder="Confirmar nova senha"
-                />
+                {netInfo.isConnected === true && (
+                  <>
+                    <PasswordInput iconName="lock" placeholder="Senha atual" />
+                    <PasswordInput iconName="lock" placeholder="Nova senha" />
+                    <PasswordInput
+                      iconName="lock"
+                      placeholder="Confirmar nova senha"
+                    />
+                  </>
+                )}
               </Section>
             )}
             <Button title="Salvar alterações" onPress={handleProfileUpdate} />
