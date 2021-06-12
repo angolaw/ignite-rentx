@@ -14,10 +14,10 @@ import {
 import Hybrid from "../../assets/hybrid.svg";
 import CarPhoto from "../../assets/placeholder_car.png";
 import { RectButtonProps } from "react-native-gesture-handler";
-import { CarDTO } from "../../dtos/CarDTO";
+import { Car as ModelCar } from "../../database/model/Car";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 interface CarProps extends RectButtonProps {
-  data: CarDTO;
+  data: ModelCar;
 }
 
 export function Car({ data, ...rest }: CarProps) {

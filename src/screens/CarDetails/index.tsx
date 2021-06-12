@@ -30,7 +30,7 @@ import {
 } from "./styles";
 import { Accessory } from "../../components/Accessory";
 import { CarDTO } from "../../dtos/CarDTO";
-import { Car } from "../../components/Car";
+import { Car } from "../../database/model/Car";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 interface Params {
   car: CarDTO;
