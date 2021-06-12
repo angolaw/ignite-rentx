@@ -15,13 +15,7 @@ export function AppStackRoutes() {
   return (
     <Navigator headerMode="none" initialRouteName="Home">
       <Screen name="Splash" component={Splash} />
-      <Screen
-        name="Home"
-        component={AppStackRoutes}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
+      <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="Success" component={Success} />

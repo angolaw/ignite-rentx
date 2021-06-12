@@ -27,6 +27,8 @@ export function SignIn() {
   }
 
   async function handleSignIn() {
+    console.log("CALLED HANDLESIGNIN");
+
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
