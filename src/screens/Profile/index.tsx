@@ -26,18 +26,36 @@ import {
   Keyboard,
 } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { getTabBarHeight } from "@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar";
 import { PasswordInput } from "../../components/PasswordInput";
-
+import * as ImagePicker from "expo-image-picker";
 export function Profile() {
   const theme = useTheme();
   const navigation = useNavigation();
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
   const { user } = useAuth();
+  const [userImage, setUserImage] = useState(user.avatar);
+
+  //user  data
+  const [name, setName] = useState(user.name);
+  const [driverLicense, setDriverLicense] = useState(user.driver_license);
   function handleGoBack() {
     navigation.goBack();
   }
   function logOut() {}
+  async function handleSelectAvatar() {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+    if (result.cancelled) {
+      return;
+    }
+    if (result.uri) {
+      setUserImage(result.uri);
+    }
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -54,10 +72,16 @@ export function Profile() {
             <PhotoContainer>
               <Photo
                 source={{
-                  uri: "https://avatars.githubusercontent.com/u/46244572?v=4",
+                  uri:
+                    userImage ||
+                    "https://avatars.githubusercontent.com/u/46244572?v=4",
                 }}
               />
-              <PhotoButton onPress={() => {}}>
+              <PhotoButton
+                onPress={() => {
+                  handleSelectAvatar;
+                }}
+              >
                 <Feather
                   name="camera"
                   size={24}
@@ -94,10 +118,13 @@ export function Profile() {
                   defaultValue={user.name}
                   placeholder="Nome"
                   autoCorrect={false}
+                  value={name}
+                  onChangeText={setName}
                 />
                 <Input
                   iconName="mail"
                   editable={false}
+                  value={user.email}
                   defaultValue={user.email}
                   autoCorrect={false}
                 />
@@ -106,6 +133,8 @@ export function Profile() {
                   defaultValue={user.driver_license}
                   autoCorrect={false}
                   keyboardType="numeric"
+                  value={driverLicense}
+                  onChangeText={setDriverLicense}
                 />
               </Section>
             ) : (
