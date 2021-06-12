@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import FastImage from "react-native-fast-image";
 import styled from "styled-components/native";
 
 interface ImageIndexProps{
@@ -20,7 +21,7 @@ export const CarImagesWrapper = styled.View`
   align-items:center;
 `;
 
-export const CarImage = styled.Image`
+export const CarImage = styled(FastImage)`
   height: 132px;
   width: 280px;
 `;
