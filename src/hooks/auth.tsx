@@ -22,6 +22,7 @@ interface User {
 interface AuthContextData {
   user: User;
   signIn: (credentials: SignInCredentials) => Promise<void>;
+  signOut: () => Promise<void>;
 }
 interface SignInCredentials {
   email: string;
@@ -59,6 +60,18 @@ function AuthProvider({ children }: AuthProviderProps) {
       throw new Error(e);
     }
   }
+  async function signOut() {
+    try {
+      const userCollection = database.get<ModelUser>("users");
+      await database.action(async () => {
+        const userSelected = await userCollection.find(data.id);
+        await userSelected.destroyPermanently();
+      });
+      setData({} as User);
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
   useEffect(() => {
     async function loadUserData() {
       const userCollection = database.get<ModelUser>("users");
@@ -72,7 +85,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     loadUserData();
   }, []);
   return (
-    <AuthContext.Provider value={{ user: data, signIn }}>
+    <AuthContext.Provider value={{ user: data, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
