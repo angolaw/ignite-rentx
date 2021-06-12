@@ -8,6 +8,9 @@ import {
   HeaderTop,
   HeaderTitle,
   LogoutButton,
+  PhotoContainer,
+  Photo,
+  PhotoButton,
 } from "./styles";
 import { Feather } from "@expo/vector-icons";
 export function Profile() {
@@ -26,9 +29,23 @@ export function Profile() {
           <BackButton color={theme.colors.shape} onPress={handleGoBack} />
           <HeaderTitle>Editar Perfil</HeaderTitle>
           <LogoutButton onPress={logOut}>
-            <Feather name="power" size={24} />
+            <Feather name="power" size={24} color={theme.colors.shape} />
           </LogoutButton>
         </HeaderTop>
+        <PhotoContainer>
+          <Photo
+            source={{
+              uri: "https://avatars.githubusercontent.com/u/46244572?v=4",
+            }}
+          />
+          <PhotoButton onPress={() => {}}>
+            <Feather
+              name="camera"
+              size={24}
+              color={theme.colors.background_secondary}
+            />
+          </PhotoButton>
+        </PhotoContainer>
       </Header>
     </Container>
   );
