@@ -52,6 +52,7 @@ export function MyCars() {
       const data = response ? response.data : [];
       const dataFormatted = data.map((data: DataProps) => {
         return {
+          id: data.id,
           car: data.car,
           start_date: format(
             getPlatformDate(new Date(data.start_date)),
