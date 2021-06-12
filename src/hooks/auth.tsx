@@ -40,7 +40,6 @@ function AuthProvider({ children }: AuthProviderProps) {
   async function signIn({ email, password }: SignInCredentials) {
     try {
       const response = await api.post("/sessions", { email, password });
-      //setData
       const { token, user } = response.data;
       //faz nossa api conhecer o user autenticado
       api.defaults.headers.authorization = `Bearer ${token}`;
