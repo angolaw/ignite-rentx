@@ -27,6 +27,7 @@ import {
   About,
   Accessories,
   Footer,
+  Offline,
 } from "./styles";
 import { Accessory } from "../../components/Accessory";
 import { CarDTO } from "../../dtos/CarDTO";
@@ -150,6 +151,9 @@ export function CarDetails() {
             title="Escolher o periodo do aluguel"
             onPress={() => handleCarSchedule(car)}
           />
+          {netInfo.isConnected === false && (
+            <Offline>Para ver os detalhes, conecte-se à Internet</Offline>
+          )}
         </Footer>
       </Animated.ScrollView>
     </Container>
