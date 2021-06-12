@@ -25,6 +25,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { getTabBarHeight } from "@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar";
+import { PasswordInput } from "../../components/PasswordInput";
 
 export function Profile() {
   const theme = useTheme();
@@ -63,7 +66,11 @@ export function Profile() {
               </PhotoButton>
             </PhotoContainer>
           </Header>
-          <Content>
+          <Content
+            style={{
+              marginBottom: useBottomTabBarHeight(),
+            }}
+          >
             <Options>
               <Option
                 active={option === "dataEdit"}
@@ -98,6 +105,14 @@ export function Profile() {
                 value={auth.user.driver_license}
                 autoCorrect={false}
                 keyboardType="numeric"
+              />
+            </Section>
+            <Section>
+              <PasswordInput iconName="lock" placeholder="Senha atual" />
+              <PasswordInput iconName="lock" placeholder="Nova senha" />
+              <PasswordInput
+                iconName="lock"
+                placeholder="Confirmar nova senha"
               />
             </Section>
           </Content>
