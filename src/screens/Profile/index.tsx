@@ -33,7 +33,7 @@ export function Profile() {
   const theme = useTheme();
   const navigation = useNavigation();
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
-  const auth = useAuth();
+  const { user } = useAuth();
   function handleGoBack() {
     navigation.goBack();
   }
@@ -87,34 +87,37 @@ export function Profile() {
                 </OptionTitle>
               </Option>
             </Options>
-            <Section>
-              <Input
-                iconName="user"
-                value={auth.user.name}
-                placeholder="Nome"
-                autoCorrect={false}
-              />
-              <Input
-                iconName="mail"
-                editable={false}
-                value={auth.user.email}
-                autoCorrect={false}
-              />
-              <Input
-                iconName="credit-card"
-                value={auth.user.driver_license}
-                autoCorrect={false}
-                keyboardType="numeric"
-              />
-            </Section>
-            <Section>
-              <PasswordInput iconName="lock" placeholder="Senha atual" />
-              <PasswordInput iconName="lock" placeholder="Nova senha" />
-              <PasswordInput
-                iconName="lock"
-                placeholder="Confirmar nova senha"
-              />
-            </Section>
+            {option === "dataEdit" ? (
+              <Section>
+                <Input
+                  iconName="user"
+                  defaultValue={user.name}
+                  placeholder="Nome"
+                  autoCorrect={false}
+                />
+                <Input
+                  iconName="mail"
+                  editable={false}
+                  defaultValue={user.email}
+                  autoCorrect={false}
+                />
+                <Input
+                  iconName="credit-card"
+                  defaultValue={user.driver_license}
+                  autoCorrect={false}
+                  keyboardType="numeric"
+                />
+              </Section>
+            ) : (
+              <Section>
+                <PasswordInput iconName="lock" placeholder="Senha atual" />
+                <PasswordInput iconName="lock" placeholder="Nova senha" />
+                <PasswordInput
+                  iconName="lock"
+                  placeholder="Confirmar nova senha"
+                />
+              </Section>
+            )}
           </Content>
         </Container>
       </TouchableWithoutFeedback>
