@@ -6,8 +6,7 @@ import { Car } from "../../components/Car";
 import { useNavigation } from "@react-navigation/core";
 import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
-import { Loading } from "../../components/Loading";
-import { Ionicons } from "@expo/vector-icons";
+import { synchronize } from "@nozbe/watermelondb/sync";
 import { useTheme } from "styled-components";
 import Animated, {
   useSharedValue,
@@ -16,9 +15,11 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import { RectButton, PanGestureHandler } from "react-native-gesture-handler";
-import { StyleSheet, BackHandler } from "react-native";
+import { StyleSheet, BackHandler, Alert } from "react-native";
 import { LoadAnimation } from "../../components/LoadAnimation";
 import { useAuth } from "../../hooks/auth";
+import { useNetInfo } from "@react-native-community/netinfo";
+import { database } from "../../database";
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 export function Home() {
@@ -27,7 +28,7 @@ export function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const theme = useTheme();
   const { user } = useAuth();
-
+  const netInfo = useNetInfo();
   //button animation
   const positionX = useSharedValue(0);
   const positionY = useSharedValue(0);
@@ -54,6 +55,25 @@ export function Home() {
       positionY.value = withSpring(0);
     },
   });
+
+  //offline sync
+  async function offlineSync() {
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const { data } = await api.get(
+          `cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`
+        );
+        const { changes, latestVersion } = data;
+        return { changes, timestamp: latestVersion };
+      },
+      pushChanges: async ({ changes }) => {
+        const user = changes.users;
+        await api.post(`/users/sync`, user);
+      },
+    });
+  }
+
   useEffect(() => {
     //cleanup useEffect
     let isMounted = true;
