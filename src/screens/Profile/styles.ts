@@ -42,13 +42,13 @@ export const Photo = styled.Image`
   border-radius: 90px;
 `;
 export const PhotoButton = styled(RectButton)`
-  width: ${RFValue(40)}px;
-  height: ${RFValue(40)}px;
+  width: 40px;
+  height: 40px;
   align-items: center;
   justify-content: center;
   position: absolute;
-  margin-left: 120px;
-  margin-top: 150px;
+  bottom: 10px;
+  right: 10px;
   background-color: ${({theme}) => theme.colors.main}
 
 `;
