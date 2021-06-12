@@ -115,9 +115,7 @@ export function Profile() {
         },
         {
           text: "Sair",
-          onPress: () => {
-            signOut();
-          },
+          onPress: () => signOut(),
         },
       ]
     );
